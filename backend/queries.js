@@ -22,8 +22,19 @@ const getAllTemp = (request, response) => {
 }
 
 
+
 const uploadTemp = (request, response) => {
-    const { location, temperature, date, time } = request.body
+    console.log("screening only here");
+    console.log("request.body : ",request.body);
+    let temp = request.body;
+    let jsons = JSON.stringify(temp);
+
+    // console.log("the json : " ,jsons.Temprature);
+    // let temps = [jsons[2],jsons[3],jsons[4],jsons[5],jsons[6]];
+    // console.log("the values : ",temps.join());
+    const location = "Indore, MP";
+    const date = "31/03/2023";
+    const time = "5:12 PM";
     try {
         pool.query('INSERT INTO iot_data (location,temperature, date, time ) VALUES ($1, $2, $3,$4) RETURNING *', [location, temperature, date, time]).then((results) => {
             response.status(200).send(results.rows[0])

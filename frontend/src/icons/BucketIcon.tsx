@@ -1,4 +1,5 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const BucketIcon = (props: SvgIconProps) => {
   return (
@@ -11,4 +12,4 @@ const BucketIcon = (props: SvgIconProps) => {
   );
 };
 
-export default BucketIcon;
+export default LocationOnIcon;

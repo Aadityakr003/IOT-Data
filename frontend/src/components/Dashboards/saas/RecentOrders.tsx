@@ -15,6 +15,14 @@ import React, { useEffect, useState } from "react";
 import { IotData } from "pages/dashboards/IiotData";
 import axios from "axios";
 
+interface IoTData {
+  id: any;
+  location: any;
+  temperature: any;
+  date: any;
+  time: any;
+}
+
 const commonCSS = {
   minWidth: 120,
   "&:nth-of-type(2)": { minWidth: 170 },
@@ -44,9 +52,20 @@ const BodyTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const RecentOrders = () => {
+  const [data, setData] = useState({
+    id: "",
+    location: "",
+    temperature: "",
+    date: "",
+    time: "",
+  });
+
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
-      console.log("responeded data : ", response.data);
+      console.log("responeded data..... : ", response.data);
+      if (response.data) {
+        // setData(response.data);
+      }
     });
   }, []);
 

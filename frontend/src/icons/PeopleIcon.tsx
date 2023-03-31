@@ -1,4 +1,5 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 const PeopleIcon = (props: SvgIconProps) => {
   return (
@@ -29,4 +30,4 @@ const PeopleIcon = (props: SvgIconProps) => {
   );
 };
 
-export default PeopleIcon;
+export default AccessTimeIcon;

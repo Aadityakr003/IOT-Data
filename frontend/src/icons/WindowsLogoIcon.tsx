@@ -1,4 +1,5 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 
 const WindowsLogoIcon = (props: SvgIconProps) => {
   return (
@@ -23,4 +24,4 @@ const WindowsLogoIcon = (props: SvgIconProps) => {
   );
 };
 
-export default WindowsLogoIcon;
+export default DateRangeIcon;

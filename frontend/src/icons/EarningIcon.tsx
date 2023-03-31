@@ -1,4 +1,5 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 
 const EarningIcon = (props: SvgIconProps) => {
   return (
@@ -11,4 +12,4 @@ const EarningIcon = (props: SvgIconProps) => {
   );
 };
 
-export default EarningIcon;
+export default WbSunnyIcon;

@@ -15,19 +15,36 @@ import axios from "axios";
 
 import { FC } from "react";
 
-interface IotData {
-  id?: any | null;
-  location: string;
-  temperature: string;
-  data: string;
-  time: string;
-}
-
 const SaaS = () => {
+  const theme = useTheme();
+  const [location, setLocation] = React.useState({
+    price: "",
+    Icon: BucketIcon,
+    title: "Location",
+    color: theme.palette.primary.main,
+  });
+  const [temp, setTemp] = React.useState({
+    price: "",
+    title: "Temperature",
+    Icon: EarningIcon,
+    color: theme.palette.primary.purple,
+  });
+  const [date, setDate] = React.useState({
+    price: "",
+    Icon: WindowsLogoIcon,
+    title: "Date",
+    color: theme.palette.primary.red,
+  });
+  const [time, setTime] = React.useState({
+    price: "",
+    Icon: PeopleIcon,
+    title: "Time",
+    color: theme.palette.primary.yellow,
+  });
+
   // change navbar title
   useTitle("Tracking Dashboard");
 
-  const theme = useTheme();
   const baseURL = "http://localhost:3000/getAllTemp";
 
   const cardList = [
@@ -59,18 +76,7 @@ const SaaS = () => {
 
   React.useEffect(() => {
     test();
-    axios.get(baseURL).then((response) => {
-      console.log("responeded11111 : ");
-
-      // const iot: IotData = {
-      //   id:response.data ,
-      //   location: "Josh",
-      //   temperature: "",
-      //   data:,
-      //   time:
-
-      // };
-    });
+    axios.get(baseURL).then((response) => {});
   }, []);
 
   const test = async () => {
@@ -78,16 +84,34 @@ const SaaS = () => {
     const details = await response.json();
     const latestData = await details[details.length - 1];
     console.log("latestData", latestData);
+    setLocation({ ...location, price: latestData?.location });
+    setTemp({ ...temp, price: latestData?.temperature });
+    setDate({ ...date, price: latestData?.date });
+    setTime({ ...time, price: latestData?.time });
   };
+
+  // const intervalId = setInterval(() => {
+  //   test();
+  //   console.log("..................................................");
+  // }, 600000);
 
   return (
     <Box pt={2} pb={4}>
       <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
-        {cardList.map((card, index) => (
-          <Grid item lg={3} xs={6} key={index}>
-            <SaaSCard card={card} />
-          </Grid>
-        ))}
+        {/* {cardList.map((card, index) => ( */}
+        <Grid item lg={3} xs={6}>
+          <SaaSCard card={location} />
+        </Grid>
+        <Grid item lg={3} xs={6}>
+          <SaaSCard card={temp} />
+        </Grid>
+        <Grid item lg={3} xs={6}>
+          <SaaSCard card={date} />
+        </Grid>
+        <Grid item lg={3} xs={6}>
+          <SaaSCard card={time} />
+        </Grid>
+        {/* ))} */}
       </Grid>
 
       <Grid container spacing={4} pt={4}>
@@ -105,9 +129,7 @@ const SaaS = () => {
           <TopSelling />
         </Grid>
 
-        <Grid item xs={12}>
-          {/* <Footer imageLink="/static/illustration/sass-dashboard.svg" /> */}
-        </Grid>
+        <Grid item xs={12}></Grid>
       </Grid>
     </Box>
   );
