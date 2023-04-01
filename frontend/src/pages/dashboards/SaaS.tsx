@@ -23,6 +23,12 @@ const SaaS = () => {
     title: "Location",
     color: theme.palette.primary.main,
   });
+  const [humidity, setHumidity] = React.useState({
+    price: "",
+    title: "Humidity",
+    Icon: EarningIcon,
+    color: theme.palette.primary.purple,
+  });
   const [temp, setTemp] = React.useState({
     price: "",
     title: "Temperature",
@@ -34,12 +40,6 @@ const SaaS = () => {
     Icon: WindowsLogoIcon,
     title: "Date",
     color: theme.palette.primary.red,
-  });
-  const [time, setTime] = React.useState({
-    price: "",
-    Icon: PeopleIcon,
-    title: "Time",
-    color: theme.palette.primary.yellow,
   });
 
   // change navbar title
@@ -56,28 +56,28 @@ const SaaS = () => {
     },
     {
       price: 521,
-      title: "Temperature",
+      title: "Humidity",
       Icon: EarningIcon,
       color: theme.palette.primary.purple,
     },
     {
       price: 684,
       Icon: WindowsLogoIcon,
-      title: "Date",
+      title: "Temperature",
       color: theme.palette.primary.red,
     },
     {
       price: 321,
       Icon: PeopleIcon,
-      title: "Time",
+      title: "Date",
       color: theme.palette.primary.yellow,
     },
   ];
 
-  React.useEffect(() => {
-    test();
-    axios.get(baseURL).then((response) => {});
-  }, []);
+  // React.useEffect(() => {
+  //   test();
+  //   axios.get(baseURL).then((response) => {});
+  // }, []);
 
   const test = async () => {
     let response = await fetch(baseURL);
@@ -85,15 +85,15 @@ const SaaS = () => {
     const latestData = await details[details.length - 1];
     console.log("latestData", latestData);
     setLocation({ ...location, price: latestData?.location });
+    setHumidity({ ...humidity, price: latestData?.humidity });
     setTemp({ ...temp, price: latestData?.temperature });
     setDate({ ...date, price: latestData?.date });
-    setTime({ ...time, price: latestData?.time });
   };
 
-  // const intervalId = setInterval(() => {
-  //   test();
-  //   console.log("..................................................");
-  // }, 600000);
+  const intervalId = setInterval(() => {
+    test();
+    console.log("..................................................");
+  }, 600);
 
   return (
     <Box pt={2} pb={4}>
@@ -103,13 +103,13 @@ const SaaS = () => {
           <SaaSCard card={location} />
         </Grid>
         <Grid item lg={3} xs={6}>
+          <SaaSCard card={humidity} />
+        </Grid>
+        <Grid item lg={3} xs={6}>
           <SaaSCard card={temp} />
         </Grid>
         <Grid item lg={3} xs={6}>
           <SaaSCard card={date} />
-        </Grid>
-        <Grid item lg={3} xs={6}>
-          <SaaSCard card={time} />
         </Grid>
         {/* ))} */}
       </Grid>
