@@ -25,21 +25,17 @@ const getAllTemp = (request, response) => {
 
 const uploadTemp = (request, response) => {
 
-    // let temp = request.body;
-    // console.log("this value of body : ", temp.data.temp);
-    // let temperature = temp.data.temp;
-    // let humidity;
-    // const now = new Date();
-    // const location = "Indore, MP";
-    // const date = now.toLocaleDateString();
-    // const [location, humidity, temperature, date] = request.body;
+
     console.log("request body...", request.body);
-    const location = request.body.location;
-    const humidity = request.body.humidity;
-    const temperature = request.body.temperature;
-    const date = request.body.date;
+    const lat = request.body.data.lat;
+    const lng = request.body.data.lng;
+    const humidity = request.body.data.humidity;
+    const temperature = request.body.data.temp;
+    const light = request.body.data.light;
+    const vibration = request.body.data.vibration;
+    const date = request.body.data.date;
     try {
-        pool.query('INSERT INTO iot_data (location,humidity,temperature, date) VALUES ($1, $2, $3,$4) RETURNING *', [location, humidity, temperature, date]).then((results) => {
+        pool.query('INSERT INTO iot_data (lat,lng,humidity,temperature,light, vibration, date) VALUES ($1, $2, $3,$4,$5,$6,$7) RETURNING *', [lat, lng, humidity, temperature, light, vibration, date]).then((results) => {
             response.status(200).send(results.rows[0])
             console.log(results.rows[0]);
         })
