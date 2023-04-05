@@ -15,6 +15,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import Map from "./Map";
+import WbTwilightIcon from "@mui/icons-material/WbTwilight";
+import VibrationIcon from "@mui/icons-material/Vibration";
 
 import { FC } from "react";
 
@@ -41,7 +43,19 @@ const SaaS = () => {
   const [date, setDate] = React.useState({
     price: "",
     Icon: WindowsLogoIcon,
-    title: "Date",
+    title: "Date & Time",
+    color: theme.palette.primary.main,
+  });
+  const [light, setLight] = React.useState({
+    price: "",  
+    Icon: WbTwilightIcon,
+    title: "Light",
+    color: theme.palette.primary.red,
+  });
+  const [vibration, setVibration] = React.useState({
+    price: "",
+    Icon: VibrationIcon,
+    title: "Vibration",
     color: theme.palette.primary.red,
   });
 
@@ -75,6 +89,18 @@ const SaaS = () => {
       title: "Date",
       color: theme.palette.primary.yellow,
     },
+    {
+      price: 321,
+      Icon: PeopleIcon,
+      title: "Light",
+      color: theme.palette.primary.yellow,
+    },
+    {
+      price: 321,
+      Icon: PeopleIcon,
+      title: "Vibration",
+      color: theme.palette.primary.yellow,
+    },
   ];
 
   useEffect(() => {
@@ -93,6 +119,8 @@ const SaaS = () => {
     setHumidity({ ...humidity, price: latestData?.humidity });
     setTemp({ ...temp, price: latestData?.temperature });
     setDate({ ...date, price: latestData?.date });
+    setLight({ ...light, price: latestData?.light });
+    setVibration({ ...vibration, price: latestData?.vibration });
   };
 
   return (
@@ -114,6 +142,12 @@ const SaaS = () => {
           </Grid>
           <Grid item lg={1} xs={1} sx={{ cursor: "pointer" }} onClick={test}>
             <RefreshIcon sx={{ color: "blue" }} />
+          </Grid>
+          <Grid item lg={3} xs={6}>
+            <SaaSCard card={light} />
+          </Grid>
+          <Grid item lg={3} xs={6}>
+            <SaaSCard card={vibration} />
           </Grid>
           {/* ))} */}
         </Grid>
