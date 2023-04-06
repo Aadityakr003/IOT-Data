@@ -25,7 +25,7 @@ const SaaS = () => {
   const [location, setLocation] = React.useState({
     price: "",
     Icon: BucketIcon,
-    title: "Location",
+    title: "",
     color: theme.palette.primary.main,
   });
   const [humidity, setHumidity] = React.useState({
@@ -47,7 +47,7 @@ const SaaS = () => {
     color: theme.palette.primary.main,
   });
   const [light, setLight] = React.useState({
-    price: "",  
+    price: "",
     Icon: WbTwilightIcon,
     title: "Light",
     color: theme.palette.primary.red,
@@ -115,7 +115,8 @@ const SaaS = () => {
     const details = await response.json();
     const latestData = await details[details.length - 1];
     console.log("latestData", latestData);
-    setLocation({ ...location, price: latestData?.location });
+    let _location = "Lat"+latestData?.lat+","+"Long"+latestData?.lng;
+    setLocation({ ...location, price: _location });
     setHumidity({ ...humidity, price: latestData?.humidity });
     setTemp({ ...temp, price: latestData?.temperature });
     setDate({ ...date, price: latestData?.date });
