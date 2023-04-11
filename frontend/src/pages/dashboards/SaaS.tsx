@@ -17,8 +17,10 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import Map from "./Map";
 import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import VibrationIcon from "@mui/icons-material/Vibration";
+import ElectricCarIcon from "@mui/icons-material/ElectricCar";
 
 import { FC } from "react";
+import { ShoppingCartCheckoutSharp } from "@mui/icons-material";
 
 const SaaS = () => {
   const theme = useTheme();
@@ -56,6 +58,12 @@ const SaaS = () => {
     price: "",
     Icon: VibrationIcon,
     title: "Vibration",
+    color: theme.palette.primary.red,
+  });
+  const [shock, setShock] = React.useState({
+    price: "",
+    Icon: ElectricCarIcon,
+    title: "Shock",
     color: theme.palette.primary.red,
   });
 
@@ -101,6 +109,12 @@ const SaaS = () => {
       title: "Vibration",
       color: theme.palette.primary.yellow,
     },
+    {
+      price: 321,
+      Icon: PeopleIcon,
+      title: "Shock",
+      color: theme.palette.primary.yellow,
+    },
   ];
 
   useEffect(() => {
@@ -115,13 +129,24 @@ const SaaS = () => {
     const details = await response.json();
     const latestData = await details[details.length - 1];
     console.log("latestData", latestData);
-    let _location = "Lat"+latestData?.lat+","+"Long"+latestData?.lng;
+    let _location = "Lat" + latestData?.lat + ", " + "Long" + latestData?.lng;
     setLocation({ ...location, price: _location });
     setHumidity({ ...humidity, price: latestData?.humidity });
     setTemp({ ...temp, price: latestData?.temperature });
     setDate({ ...date, price: latestData?.date });
     setLight({ ...light, price: latestData?.light });
     setVibration({ ...vibration, price: latestData?.vibration });
+    let _shock =
+      "X" +
+      latestData?.lat +
+      ", " +
+      "Y" +
+      latestData?.lng +
+      ", " +
+      "Z" +
+      latestData?.lng;
+
+    setShock({ ...shock, price: latestData?._shock });
   };
 
   return (
@@ -149,6 +174,9 @@ const SaaS = () => {
           </Grid>
           <Grid item lg={3} xs={6}>
             <SaaSCard card={vibration} />
+          </Grid>
+          <Grid item lg={3} xs={6}>
+            <SaaSCard card={shock} />
           </Grid>
           {/* ))} */}
         </Grid>
