@@ -34,8 +34,9 @@ const uploadTemp = (request, response) => {
     const light = request.body.data.light;
     const vibration = request.body.data.vibration;
     const date = request.body.data.date;
+    const shock = request.body.data.shock;
     try {
-        pool.query('INSERT INTO iot_data (lat,lng,humidity,temperature,light, vibration, date) VALUES ($1, $2, $3,$4,$5,$6,$7) RETURNING *', [lat, lng, humidity, temperature, light, vibration, date]).then((results) => {
+        pool.query('INSERT INTO iot_data (lat,lng,humidity,temperature,light, vibration, date,shock) VALUES ($1, $2, $3,$4,$5,$6,$7,$8) RETURNING *', [lat, lng, humidity, temperature, light, vibration, date, shock]).then((results) => {
             response.status(200).send(results.rows[0])
             console.log(results.rows[0]);
         })
