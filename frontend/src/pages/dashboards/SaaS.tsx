@@ -137,16 +137,14 @@ const SaaS = () => {
     setLight({ ...light, price: latestData?.light });
     setVibration({ ...vibration, price: latestData?.vibration });
     let _shock =
-      "X" +
-      latestData?.lat +
-      ", " +
-      "Y" +
-      latestData?.lng +
-      ", " +
-      "Z" +
-      latestData?.lng;
+      latestData?.shock.x +
+      " x axis, " +
+      latestData?.shock.y +
+      " y axis, " +
+      latestData?.shock.z +
+      " z axis";
 
-    setShock({ ...shock, price: latestData?._shock });
+    setShock({ ...shock, price: _shock });
   };
 
   return (
@@ -183,7 +181,7 @@ const SaaS = () => {
 
         <Grid container spacing={2} pt={2}>
           <Grid item lg={8} md={5} xs={4}>
-            <Map />
+            {/* <Map /> */}
           </Grid>
           <Grid item lg={4} md={5} xs={12}>
             {/* <Analytics /> */}
@@ -193,7 +191,7 @@ const SaaS = () => {
             {/* <RecentOrders /> */}
           </Grid>
           <Grid item lg={4} md={5} xs={12}>
-            {/* <TopSelling /> */}
+            <TopSelling />
           </Grid>
 
           <Grid item xs={12}></Grid>
