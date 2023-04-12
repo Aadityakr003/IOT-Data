@@ -25,7 +25,6 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
 const SaaSCard: FC<SaaSCardProps> = ({ card }) => {
   const { Icon, title, color, price } = card;
-
   return (
     <StyledCard>
       <Box

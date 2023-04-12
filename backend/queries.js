@@ -38,7 +38,7 @@ const uploadTemp = (request, response) => {
     try {
         pool.query('INSERT INTO iot_data (lat,lng,humidity,temperature,light, vibration, date,shock) VALUES ($1, $2, $3,$4,$5,$6,$7,$8) RETURNING *', [lat, lng, humidity, temperature, light, vibration, date, shock]).then((results) => {
             response.status(200).send(results.rows[0])
-            console.log(results.rows[0]);
+            console.log("database Result : ",results.rows[0]);
         })
     } catch (error) {
         console.log(error);
